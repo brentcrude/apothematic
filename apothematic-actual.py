@@ -67,7 +67,7 @@ Area: {self.area()}
 
 class square(regularpolygon):
     def __init__(self, sidelength):
-        regularpolygon.__init__(4, sidelength)
+        regularpolygon.__init__(self, 4, sidelength)
         self.diagonalattr = sqrt(2)*self.sidelength
     def diagonal(self):
         return self.diagonalattr
@@ -84,7 +84,7 @@ Area: {self.area()}
 '''
 class pentagon(regularpolygon):
     def __init__(self, sidelength):
-        regularpolygon.__init__(5, sidelength)
+        regularpolygon.__init__(self, 5, sidelength)
     def __repr__(self):
         return f'''PENTAGON:
 Sides: {self.sides()}
@@ -97,7 +97,7 @@ Area: {self.area()}
 '''
 class hexagon(regularpolygon):
     def __init__(self, sidelength):
-        regularpolygon.__init__(6, sidelength)
+        regularpolygon.__init__(self, 6, sidelength)
     def __repr__(self):
         return f'''HEXAGON:
 Sides: {self.sides()}
@@ -227,7 +227,7 @@ Volume: {self.volume()}
     
 class cylinder(prism):
     def __init__(self, base, height):
-        prism.__init__(base, height)
+        prism.__init__(self, base, height)
     def __repr__(self):
         return f'''CYLINDER:
 Base:
@@ -286,7 +286,7 @@ Volume: {self.volume()}
 
 class cone(pyramid):
     def __init__(self, base, altitude):
-        pyramid.__init__(base, altitude)
+        pyramid.__init__(self, base, altitude)
     def __repr__(self):
         return f'''CONE:
 Base:
