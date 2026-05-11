@@ -385,4 +385,6 @@ elif shape in ['prism', 'cylinder', 'pyramid', 'cone']:
     elif shape == 'cone':
         height = input('Height (Altitude):')
         print(cone(b, float(height)))
-        
+class Ankylosaurus:
+    def __repr__(self):
+        return "Caden made me do it.\nRoar."
