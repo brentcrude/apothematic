@@ -68,7 +68,7 @@ Area: {self.area()}
 class square(regularpolygon):
     def __init__(self, sidelength):
         regularpolygon.__init__(self, 4, sidelength)
-        self.diagonalattr = sqrt(2)*self.sidelength
+        self.diagonalattr = sqrt(2)*self.sidelengthattr
     def diagonal(self):
         return self.diagonalattr
     def __repr__(self):
@@ -384,3 +384,4 @@ elif shape in ['prism', 'cylinder', 'pyramid', 'cone']:
     elif shape == 'cone':
         height = input('Height (Altitude):')
         print(cone(b, float(height)))
+        
