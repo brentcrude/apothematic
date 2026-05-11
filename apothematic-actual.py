@@ -32,7 +32,7 @@ class regularpolygon(object):
         self.sidelengthattr = sidelength
         #calculate radius, apothem
         self.angleattr = 180*(self.sidesattr - 2)/self.sidesattr #interior angle formula - verify
-        self.apothemattr = tan(self.angleattr/2)*self.sidelengthattr/2 #sohcahtoa: opposite/adjacent * adjacent
+        self.apothemattr = (self.sidelengthattr/2)/tan(self.angleattr/2) #sohcahtoa: opposite/adjacent * adjacent
         self.radiusattr = 1/(cos(self.angleattr/2)/(self.sidelengthattr/2))
         #sohcahtoa: 1/([adjacent/hypotenuse] / adjacent)
         self.perimeterattr = self.sidesattr * self.sidelengthattr #It's a regular polygon
@@ -151,7 +151,7 @@ class trapezoid(object):
     def median(self):
         return self.medianattr
     def perimeter(self):
-        if self.perimeterattr==None:
+        if self.perimeterattr is None:
             print("ALERT: Perimeter for trapezoid is currently undefined.")
             return None
         return self.perimeterattr
@@ -248,14 +248,15 @@ class pyramid(object):
             self.lateralareaattr=(1/2)*self.baseattr.perimeter()*self.slantheightattr
             self.totalareaattr=self.lateralareaattr+self.baseattr.area()
         elif isinstance(self.baseattr, rectangle):
-            l = sqrt((self.baseattr.length()**2)+(self.altitudeattr**2))
-            w = sqrt((self.baseattr.width()**2)+(self.altitudeattr**2))
+            l = sqrt(((self.baseattr.length()/2)**2)+(self.altitudeattr**2))
+            w = sqrt(((self.baseattr.width()/2)**2)+(self.altitudeattr**2))
             self.slantheightattr = [l, w, l, w]
             self.lateralareaattr=(self.baseattr.width()*l)+(self.baseattr.length()*w)
             self.totalareaattr=self.lateralareaattr+self.baseattr.area()
         elif isinstance(self.baseattr, circle):
             self.slantheightattr = sqrt((self.baseattr.radius()**2)+(self.altitudeattr**2))
             self.lateralareaattr = pi*self.baseattr.radius()*self.slantheightattr
+            self.totalareaattr = self.lateralareaattr+self.baseattr.area()
         else:
             pass #Why on Earth do you have a trapezoidal base, dude?
         self.volumeattr=self.baseattr.area()*self.altitudeattr/3
@@ -308,7 +309,7 @@ while not validshape:
 if shape == 'regularpolygon':
     sides = input('Sides:')
     sidelength = input('Sidelength:')
-    print(regularpolygon(float(sides), float(sidelength)))
+    print(regularpolygon(int(sides), float(sidelength)))
 elif shape == 'square':
     sidelength = input('Sidelength:')
     print(square(float(sidelength)))
@@ -321,7 +322,7 @@ elif shape == 'hexagon':
 elif shape == 'rectangle':
     length = input('Length:')
     width = input('Width:')
-    print(regularpolygon(float(length), float(width)))
+    print(rectangle(float(length), float(width)))
 elif shape == 'trapezoid':
     b1 = input('Base 1:')
     b2 = input('Base 2:')
@@ -345,7 +346,7 @@ elif shape in ['prism', 'cylinder', 'pyramid', 'cone']:
     if base == 'regularpolygon':
         sides = input('Sides:')
         sidelength = input('Sidelength:')
-        b=regularpolygon(float(sides), float(sidelength))
+        b=regularpolygon(int(sides), float(sidelength))
     elif base == 'square':
         sidelength = input('Sidelength:')
         b=square(float(sidelength))
@@ -358,7 +359,7 @@ elif shape in ['prism', 'cylinder', 'pyramid', 'cone']:
     elif base == 'rectangle':
         length = input('Length:')
         width = input('Width:')
-        b=regularpolygon(float(length), float(width))
+        b=rectangle(float(length), float(width))
     elif base == 'trapezoid':
         b1 = input('Base 1:')
         b2 = input('Base 2:')
